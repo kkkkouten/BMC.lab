@@ -1,6 +1,6 @@
 # BMC.lab
-This repository is for BMC.lab.
-DBP project
+This repository is toolbox for BMC.lab.
+Branch is DBP project.
 ```
 .
 ├── PCT_part_1.py
