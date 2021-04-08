@@ -1,5 +1,6 @@
 # BMC.lab
-This repository is toolbox for BMC.lab.
+This repository is a toolbox for BMC.lab members.
+Everybody could git brach to revise code.
 Branch is DBP project.
 ```
 .
