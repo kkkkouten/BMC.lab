@@ -57,15 +57,20 @@ class BMC_lab(object):
         :return: derivative array
         """
         res = list()
-        array1 = (-25 * array[0] + 48 * array[1] - 36 * array[2] + 16 * array[3] - 3 * array[4]) / 12 * delta_t
-        array2 = (-3 * array[0] - 10 * array[1] + 18 * array[2] - 6 * array[3] + array[4]) / 12 * delta_t
+        array1 = (-25 * array[0] + 48 * array[1] - 36 * array[2] +
+                  16 * array[3] - 3 * array[4]) / (12 * delta_t)
+        array2 = (-3 * array[0] - 10 * array[1] + 18 * array[2] -
+                  6 * array[3] + array[4]) / (12 * delta_t)
         res.append(array1)
         res.append(array2)
         for i in range(2, len(array) - 2):
-            array_i = (array[i - 2] - 8 * array[i - 1] + 8 * array[i + 1] - array[i + 2]) / 12 * delta_t
+            array_i = (array[i - 2] - 8 * array[i - 1] +
+                       8 * array[i + 1] - array[i + 2]) / (12 * delta_t)
             res.append(array_i)
-        array_last2 = (-1 * array[0] + 6 * array[1] - 18 * array[2] + 10 * array[3] + 3 * array[4]) / 12 * delta_t
-        array_last1 = (-3 * array[0] - 16 * array[1] + 36 * array[2] - 48 * array[3] + 25 * array[4]) / 12 * delta_t
+        array_last2 = (-1 * array[0] + 6 * array[1] - 18 * array[2] +
+                       10 * array[3] + 3 * array[4]) / (12 * delta_t)
+        array_last1 = (-3 * array[0] - 16 * array[1] + 36 * array[2] -
+                       48 * array[3] + 25 * array[4]) / (12 * delta_t)
         res.append(array_last2)
         res.append(array_last1)
         return np.array(res)

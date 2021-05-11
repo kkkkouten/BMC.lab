@@ -25,20 +25,14 @@ def read_file(file, encoding="IS-8859-1"):
     return content
 
 
-def clean_format(DeviceData, arg='DAQ'):
-    """
-    :param DeviceData: read_file
-    :return: Lights On Signal Start (loss)
-    DeviceData是为经分离','和转换成浮点数的数据
-    首先将整个字符串按照','进行分离，再对每个元素进行类型转换
-    (param).astype(np.float)中的param 必须是np.array()格式
-    最终进行DataFrame格式输出
-    """
+def clean_format(DeviceData, type='DAQ'):
+    """pass"""
+
     DAQ_operators = [224.8089439, 224.8089439, 2231.039289,  # fp2 fx,fy,fz
                      885.0748065, 885.0748065, 885.0748065,  # fp2 mx,my,mz
                      224.8089439, 224.8089439, 2231.039289,  # fp1 fx,fy,fz
                      885.0748065, 885.0748065, 885.0748065]  # fp1 mx,my,mz
-    if arg == 'DAQ':
+    if type == 'DAQ':
         columns_name = DeviceData[14].split(',')
         DeviceArray = []
         for Device in DeviceData[15:]:
@@ -53,7 +47,7 @@ def clean_format(DeviceData, arg='DAQ'):
         res = pd.concat((loss.iloc[:, :3], res), axis=1)
         res = pd.concat((res, loss.iloc[:, -1]), axis=1)
 
-    elif arg == 'AMTI':
+    elif type == 'AMTI':
         columns_name = DeviceData[34].split(',')
         DeviceArray = []
         for Device in DeviceData[35:]:
@@ -67,7 +61,7 @@ def clean_format(DeviceData, arg='DAQ'):
             DeviceArray.append(Device)
         res = pd.DataFrame(np.array(DeviceArray), columns=columns_name)
 
-    elif arg is "TEC":
+    elif type is "TEC":
         columns_name = ["Time", "Fx", "Fy", "Fz", "Mx", "My", "Mz"]
         data = []
         for line in content[10:]:
@@ -76,7 +70,7 @@ def clean_format(DeviceData, arg='DAQ'):
             data.append(array)
         res = pd.DataFrame(data, columns=columns_name)
 
-    elif arg == 'ACC':
+    elif type == 'ACC':
         columns_name = ['gx', 'gy', 'gz',
                         'degx', 'degy', 'degz',
                         'g2A', 'g2B',
