@@ -6,7 +6,6 @@ Created on 2021/04/21 16:09
 @author: Tei Koten
 """
 
-
 import os
 import numpy as np
 import pandas as pd
@@ -14,9 +13,10 @@ import pandas as pd
 
 class Readfile(object):
 
-    def __init__(self, file_path, save_path):
+    def __init__(self, file_path, save_path, col_name):
         self.file_path = file_path
         self.save_path = save_path
+        self.col_name = col_name
 
     def split_dat(self):
         self.split_content(
@@ -67,10 +67,10 @@ class Readfile(object):
                     Array = np.array(split_line).astype(np.float)
                     res.append(Array)
             # 如果columns变多可以修改
-            output_res = pd.DataFrame(res, columns=['time','switch','GM','LQL','RQL', 'motive'])
-            output_path = os.path.join(self.save_path, str(i+1) + '.txt')
+            output_res = pd.DataFrame(res, columns=self.col_name)
+            output_path = os.path.join(self.save_path, str(i + 1) + '.txt')
             output_res.to_csv(output_path, index=False)
-            print(i+1, 'is finished')
+            print(i + 1, 'is finished')
         return None
 
 
@@ -78,6 +78,7 @@ if __name__ == "__main__":
 
     file_path = '/Users/kkkkouten/BMC.lab/TKT/20210512/labchart/TKT20210512_LabChart.txt'
     save_path = '/Users/kkkkouten/BMC.lab/TKT_processed/20210512/labchart'
+    col_name = ['time', 'switch', 'GM', 'LQL', 'RQL', 'AnkGyroY','motive']
 
-    rf = Readfile(file_path,save_path)
+    rf = Readfile(file_path, save_path, col_name)
     rf.split_dat()
