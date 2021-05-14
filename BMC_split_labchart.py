@@ -67,11 +67,7 @@ class Readfile(object):
                     Array = np.array(split_line).astype(np.float)
                     res.append(Array)
             # 如果columns变多可以修改
-            output_res = pd.DataFrame(res, columns=['time','iScan','laser','loadCell','Fx', 'Fy', 'Fz', 'Mx',
-                                                    'My', 'Mz'])
-            alter_col_unit =  ['loadCell', 'Fx', 'Fy', 'Fz', 'Mx', 'My', 'Mz']
-            unit = np.array([20, 10, 10, 30, 4.5, 3, 2])    # unit alter
-            output_res.loc[:,alter_col_unit] =  output_res.loc[:,alter_col_unit] * unit
+            output_res = pd.DataFrame(res, columns=['time','switch','GM','LQL','RQL', 'motive'])
             output_path = os.path.join(self.save_path, str(i+1) + '.txt')
             output_res.to_csv(output_path, index=False)
             print(i+1, 'is finished')
