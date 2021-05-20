@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 
-class Readfile(object):
+class formatLabchart(object):
 
     def __init__(self, file_path, save_path, col_name):
         self.file_path = file_path
@@ -26,8 +26,8 @@ class Readfile(object):
 
     def read_file(self, encoding="ISO-8859-1"):
         """
-        :param encoding: utf-8 可能会用上
-        :return: 包括字符串和浮点数数据
+        :param encoding: default = "ISO-8859-1",{"utf-8}
+        :return: string
         """
         with open(self.file_path, "r", encoding=encoding) as f:
             lines = f.readlines()
@@ -45,7 +45,7 @@ class Readfile(object):
             if split_line[0] == 'Interval=':
                 # print(i, i + 6)
                 num.append(i)
-                i = i + 6  # +6 是因为0-5都是字符串
+                i = i + 6  #  it's string type from 0 to 5.
             else:
                 i = i + 1
         return num
@@ -66,7 +66,6 @@ class Readfile(object):
                     split_line = line.split()
                     Array = np.array(split_line).astype(np.float)
                     res.append(Array)
-            # 如果columns变多可以修改
             output_res = pd.DataFrame(res, columns=self.col_name)
             output_path = os.path.join(self.save_path, str(i + 1) + '.txt')
             output_res.to_csv(output_path, index=False)
@@ -76,9 +75,8 @@ class Readfile(object):
 
 if __name__ == "__main__":
 
-    file_path = '/Users/kkkkouten/BMC.lab/TKT/20210512/labchart/TKT20210512_LabChart.txt'
-    save_path = '/Users/kkkkouten/BMC.lab/TKT_processed/20210512/labchart'
+    file_path = '/Users/kkkkouten/Desktop/GMD0514.txt'
+    save_path = '/Users/kkkkouten/Desktop'
     col_name = ['time', 'switch', 'GM', 'LQL', 'RQL', 'AnkGyroY','motive']
 
-    rf = Readfile(file_path, save_path, col_name)
-    rf.split_dat()
+    formatLabchart(file_path, save_path, col_name).split_dat()

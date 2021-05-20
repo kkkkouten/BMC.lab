@@ -11,7 +11,7 @@ from scipy import signal
 from scipy import interpolate
 
 
-class BMC_lab(object):
+class BMC_toolbox(object):
     """
     This class includes various common use tools for BMC.lab.
     This program is based on Biomechanics lab.
