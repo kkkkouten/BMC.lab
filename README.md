@@ -7,7 +7,6 @@
 ├── BMC_split_labchart.py
 ├── BMC_toolbox.py
 ├── README.md
-├── tree.MD
 └── tree.txt
 
 0 directories, 9 files
